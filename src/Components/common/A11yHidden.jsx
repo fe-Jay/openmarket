@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const A11yHidden = ({ txt }) => {
+export const A11yHidden = ({ children }) => {
     return (
-        <ScreenOut>{`${txt}`}</ScreenOut>
+        <ScreenOut>{children}</ScreenOut>
     )
 }
 
