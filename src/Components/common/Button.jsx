@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 const SIZES = {
     sm: css`
     --button-font-size: var(--font-size-xxs);
-    --button-padding: 0.5rem 1rem;
+    --button-padding: 0.625rem 1rem;
     --button-radius: 0.25rem;
     `,
     md: css`
@@ -50,7 +50,7 @@ function Button({ size, variant, children, icon }) {
             size={size}
             variant={variant}
         >
-            {children}
+            <span>{children}</span>
         </StyledButton>
     )
 };
@@ -68,6 +68,9 @@ const StyledButton = styled.button`
     border-radius: var(--button-radius, 0.5rem);
     color: var(--button-color, var(--color-white));
     background: var(--button-bg-color, var(--color-primary));
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     &::before {
         content: "";
         background: url(${(props) => props.icon})no-repeat center/1.5rem;
