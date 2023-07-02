@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --color-white: #fff;
     --color-black: #000;
 
+    --font-size-micro: 0.75rem;
     --font-size-xxs: 1rem;
     --font-size-xs: 1.125rem;
     --font-size-s: 1.375rem;
@@ -40,9 +41,6 @@ const GlobalStyle = createGlobalStyle`
     button {
     cursor: pointer;
     font:inherit;
-    }
-    body {
-    background-color: #eee;
     }
 `
 
