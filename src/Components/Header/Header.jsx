@@ -4,6 +4,7 @@ import { Search } from './Search';
 import { NavButton } from './NavButton';
 
 import logo from '../../Assets/Logo-hodu.svg'
+import { A11yHidden } from '../common/A11yHidden';
 
 
 const Header = () => {
@@ -13,6 +14,9 @@ const Header = () => {
                 <div>
                     <h1>
                         <img src={logo} alt="호두마켓" />
+                        <A11yHidden>
+                            Hello World
+                        </A11yHidden>
                     </h1>
                     <Search />
                     <NavButton />
