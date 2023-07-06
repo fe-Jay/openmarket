@@ -5,6 +5,7 @@ import { NavButton } from './NavButton';
 
 import logo from '../../Assets/Logo-hodu.svg'
 import { A11yHidden } from '../common/A11yHidden';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -13,10 +14,12 @@ const Header = () => {
             <Head>
                 <div>
                     <h1>
-                        <img src={logo} alt="호두마켓" />
-                        <A11yHidden>
-                            Hello World
-                        </A11yHidden>
+                        <Link to="/">
+                            <img src={logo} alt="호두마켓" />
+                            <A11yHidden>
+                                Hello World
+                            </A11yHidden>
+                        </Link>
                     </h1>
                     <Search />
                     <NavButton />
