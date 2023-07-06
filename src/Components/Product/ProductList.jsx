@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import FetchComponent from '../common/FetchComponent';
 import { A11yHidden } from '../common/A11yHidden';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
-
     return (
         <>
             <FetchComponent url="products/">
@@ -15,14 +15,16 @@ const ProductList = () => {
                             <A11yHidden>상품리스트</A11yHidden>
                         </h2>
                         {data && data.results && Array.isArray(data.results) ? (
-                            data.results.map((product) => (
-                                <article key={product.product_id}>
-                                    <span>
-                                        <img src={product.image} alt={product.product_name} />
-                                    </span>
-                                    <p>{product.store_name}</p>
-                                    <h3>{product.product_name}</h3>
-                                    <h4><strong>{product.price}</strong>원</h4>
+                            data.results.map((prod) => (
+                                <article key={prod.product_id}>
+                                    <Link to={`/${prod.product_id}`}>
+                                        <span>
+                                            <img src={prod.image} alt={prod.product_name} />
+                                        </span>
+                                        <p>{prod.store_name}</p>
+                                        <h3>{prod.product_name}</h3>
+                                        <h4><strong>{prod.price}</strong>원</h4>
+                                    </Link>
                                 </article>
                             ))
                         ) : (
@@ -30,7 +32,7 @@ const ProductList = () => {
                         )}
                     </ProductItem>
                 )}
-            </FetchComponent>
+            </FetchComponent >
         </>
     )
 };
