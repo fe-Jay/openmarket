@@ -1,65 +1,76 @@
-import React from 'react'
-import styled from 'styled-components'
+/* eslint-disable no-nested-ternary */
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ButtonIcon } from './ButtonIcon';
+import styled from "styled-components";
 
-import cart from '../../Assets/icon-shopping-cart.svg'
-import user from '../../Assets/icon-user.svg'
-import bag from '../../Assets/icon-shopping-bag.svg'
-import Button from '../common/Button';
+import bag from "../../Assets/icon-shopping-bag.svg";
+import cart from "../../Assets/icon-shopping-cart.svg";
+import user from "../../Assets/icon-user.svg";
+import Button from "../common/Button";
 
+import ButtonIcon from "./ButtonIcon";
 
-export const NavButton = () => {
-    const location = useLocation();
-    console.log(location.pathname); // 현재 페이지 경로
+export default function NavButton() {
+  const location = useLocation();
+  // console.log(location.pathname); // 현재 페이지 경로
 
-    return (
-        <NavWrap>
-            {
-                location.pathname === '/user' ? <UserHeader />
-                    : location.pathname === '/seller' ? <SellerHeader />
-                        : <GuestHeader />
-            }
-        </NavWrap>
-    )
+  return (
+    <NavWrap>
+      {location.pathname === "/user" ? (
+        <UserHeader />
+      ) : location.pathname === "/seller" ? (
+        <SellerHeader />
+      ) : (
+        <GuestHeader />
+      )}
+    </NavWrap>
+  );
 }
 
-const GuestHeader = () => (
+function GuestHeader() {
+  return (
     <>
-        <Link to="/cart">
-            <ButtonIcon icon={cart}>장바구니</ButtonIcon>
-        </Link>
-        <Link to="/login">
-            <ButtonIcon icon={user}>로그인</ButtonIcon>
-        </Link>
+      <Link to="/cart">
+        <ButtonIcon icon={cart}>장바구니</ButtonIcon>
+      </Link>
+      <Link to="/login">
+        <ButtonIcon icon={user}>로그인</ButtonIcon>
+      </Link>
     </>
-)
+  );
+}
 
-const UserHeader = () => (
+function UserHeader() {
+  return (
     <>
-        <Link to="/cart">
-            <ButtonIcon icon={cart}>장바구니</ButtonIcon>
-        </Link>
-        <Link to="/login">
-            <ButtonIcon icon={user}>로그아웃</ButtonIcon>
-        </Link>
+      <Link to="/cart">
+        <ButtonIcon icon={cart}>장바구니</ButtonIcon>
+      </Link>
+      <Link to="/login">
+        <ButtonIcon icon={user}>로그아웃</ButtonIcon>
+      </Link>
     </>
-)
+  );
+}
 
-const SellerHeader = () => (
+function SellerHeader() {
+  return (
     <>
-        <Link to="/mypage">
-            <ButtonIcon icon={user}>마이페이지</ButtonIcon>
-        </Link>
-        <Link to="/">
-            <Button icon={bag} variant="primary" size="sm">판매자 센터</Button>
-        </Link>
+      <Link to="/mypage">
+        <ButtonIcon icon={user}>마이페이지</ButtonIcon>
+      </Link>
+      <Link to="/">
+        <Button icon={bag} variant="primary" size="sm">
+          판매자 센터
+        </Button>
+      </Link>
     </>
-)
+  );
+}
 
 const NavWrap = styled.nav`
-    flex: 1 0 0;
-    gap: 1rem;
-    display: flex;
-    justify-content: flex-end;
-`
+  flex: 1 0 0;
+  gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+`;

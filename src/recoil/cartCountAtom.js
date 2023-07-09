@@ -1,7 +1,7 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 const cartCountAtom = atom({
-  key: 'cartCount',
+  key: "cartCount",
   default: 0,
 });
 

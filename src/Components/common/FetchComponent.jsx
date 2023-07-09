@@ -1,14 +1,15 @@
-import React from 'react';
-import useFetch from '../../Hook/useFetch';
+import React from "react";
 
-const FetchComponent = ({ url, children }) => {
-    const fetchUrl = 'https://openmarket.weniv.co.kr/' + url;
-    const { loading, data, error } = useFetch(fetchUrl);
+import useFetch from "../../Hook/useFetch";
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error occurred: {error.message}</div>;
+function FetchComponent({ url, children }) {
+  const fetchUrl = `https://openmarket.weniv.co.kr/${url}`;
+  const { loading, data, error } = useFetch(fetchUrl);
 
-    return children(data);
-};
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error : {error.message}</div>;
+
+  return children(data);
+}
 
 export default FetchComponent;
