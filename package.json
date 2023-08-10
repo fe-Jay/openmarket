@@ -52,5 +52,9 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8"
-  }
+  },
+  "description": "오픈마켓 리액트 개인 프로젝트",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
