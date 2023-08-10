@@ -33,7 +33,7 @@ function GuestHeader() {
       <Link to="/cart">
         <ButtonIcon icon={cart}>장바구니</ButtonIcon>
       </Link>
-      <Link to="/login">
+      <Link to="/signin">
         <ButtonIcon icon={user}>로그인</ButtonIcon>
       </Link>
     </>
@@ -46,7 +46,7 @@ function UserHeader() {
       <Link to="/cart">
         <ButtonIcon icon={cart}>장바구니</ButtonIcon>
       </Link>
-      <Link to="/login">
+      <Link to="/signin">
         <ButtonIcon icon={user}>로그아웃</ButtonIcon>
       </Link>
     </>
