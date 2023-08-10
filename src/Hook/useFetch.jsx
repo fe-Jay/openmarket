@@ -1,28 +1,51 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useFetch = url => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const BASE_URL = "https://openmarket.weniv.co.kr/";
+
+const useFetch = (
+  initialUrl = "",
+  initialMethod = "GET",
+  initialData = null,
+) => {
+  const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState({
+    url: initialUrl,
+    method: initialMethod,
+    data: initialData,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
-        const response = await axios.get(url);
-        setData(response.data);
-        setLoading(false);
+        const fetchResult = await axios({
+          url: BASE_URL + options.url,
+          method: options.method,
+          data: options.data,
+        });
+        setResponse(fetchResult.data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
-    fetchData();
-  }, [url]);
-  console.log(data);
-  return { loading, data, error };
+    if (options.url) fetchData();
+  }, [options]);
+
+  const executeFetch = (url, method = "GET", data = null) => {
+    setOptions({ url, method, data });
+  };
+
+  return { response, error, isLoading, executeFetch };
 };
 
 export default useFetch;
