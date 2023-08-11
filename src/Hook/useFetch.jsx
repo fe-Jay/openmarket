@@ -1,16 +1,12 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const BASE_URL = "https://openmarket.weniv.co.kr/";
-
 const useFetch = (
   initialUrl = "",
   initialMethod = "GET",
-  initialData = null,
+  initialData = {},
+  token = null,
 ) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -21,18 +17,29 @@ const useFetch = (
     data: initialData,
   });
 
+  const headers = {
+    "Content-type": "application/json",
+    Authorization: token ? `Bearer ${token}` : undefined,
+  };
+
+  const BASE_URL = "https://openmarket.weniv.co.kr";
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         const fetchResult = await axios({
-          url: BASE_URL + options.url,
+          url: `${BASE_URL}${options.url}`,
           method: options.method,
           data: options.data,
+          headers,
         });
         setResponse(fetchResult.data);
         setIsLoading(false);
       } catch (error) {
+        console.error(
+          "There was an error with the fetch",
+          error.response || error.message,
+        );
         setError(error);
         setIsLoading(false);
       }
