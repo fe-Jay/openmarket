@@ -7,22 +7,12 @@ import { GetProductList } from "../../ApiHandler";
 import { A11yHidden } from "../common/A11yHidden";
 
 export default function ProductList() {
-  const { response, error, getProducts } = GetProductList();
+  const { response, error, getProdList } = GetProductList();
 
   useEffect(() => {
-    getProducts();
+    getProdList();
   }, []);
 
-  useEffect(() => {
-    if (response) {
-      console.table(response);
-    }
-    if (error) {
-      console.error(error);
-    }
-  }, [response, error]);
-
-  // console.log(response);
   return (
     <ProductItem>
       <h2>
