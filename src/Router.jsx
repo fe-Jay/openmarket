@@ -1,25 +1,31 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 
-import Header from "./Components/Header/Header";
-import ProductDetails from "./Components/Product/ProductDetails";
-import ProductList from "./Components/Product/ProductList";
-import Signin from "./Components/Sign/Signin";
+import Loading from "./Components/common/Loading";
+
+const Header = lazy(() => import("./Components/Header/Header"));
+const ProductDetails = lazy(() =>
+  import("./Components/Product/ProductDetails"),
+);
+const ProductList = lazy(() => import("./Components/Product/ProductList"));
+const Signin = lazy(() => import("./Components/Sign/Signin"));
 
 export default function Router() {
   return (
     <BrowserRouter>
-      <Header />
-      <Wrapper>
-        <Routes>
-          <Route path="/">
-            <Route path="" element={<ProductList />} />
-            <Route path=":product_id" element={<ProductDetails />} />
-            <Route path="signin" element={<Signin />} />
-          </Route>
-        </Routes>
-      </Wrapper>
+      <Suspense fallback={<Loading />}>
+        <Header />
+        <Wrapper>
+          <Routes>
+            <Route path="/">
+              <Route path="" element={<ProductList />} />
+              <Route path="signin" element={<Signin />} />
+              <Route path=":productId" element={<ProductDetails />} />
+            </Route>
+          </Routes>
+        </Wrapper>
+      </Suspense>
     </BrowserRouter>
   );
 }
