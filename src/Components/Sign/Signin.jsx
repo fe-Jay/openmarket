@@ -43,12 +43,13 @@ export default function Signin() {
   }, [username, password]);
 
   // *  로그인 실행
+  const [userType, setUserType] = useState("BUYER");
   const { response, error, signIn } = PostSignIn();
 
   const handleSignIn = e => {
     e.preventDefault();
     e.stopPropagation();
-    signIn(username.value, password.value, "SELLER");
+    signIn(username.value, password.value, userType);
   };
   const [userData, setUserData] = useRecoilState(userDataAtom);
   useEffect(() => {
@@ -65,13 +66,35 @@ export default function Signin() {
   const handleSignOut = () => {
     setUserData(null);
     // recoil-persist 제거
-    localStorage.removeItem("recoil-persist");
+    localStorage.removeItem("loginState");
   };
 
   return (
     <section>
       <h2>로그인</h2>
       <form onSubmit={handleSignIn}>
+        <fieldset>
+          <legend>로그인 타입</legend>
+          <label htmlFor="SELLER">
+            <input
+              type="radio"
+              name="user_type"
+              value="SELLER"
+              onClick={() => setUserType("SELLER")}
+            />
+            판매자
+          </label>
+          <label htmlFor="BUYER">
+            <input
+              type="radio"
+              name="user_type"
+              value="BUYER"
+              onClick={() => setUserType("BUYER")}
+            />
+            구매자
+          </label>
+        </fieldset>
+
         <TextInput
           label="아이디"
           type="text"
