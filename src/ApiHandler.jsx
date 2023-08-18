@@ -3,58 +3,40 @@
 // eslint-disable-next-line import/namespace
 import useFetch from "./Hook/useFetch";
 
-// * 로그인(post)
-export function PostSignIn() {
+function createApiHandler(endpoint, method = "GET") {
   const { response, error, executeFetch } = useFetch();
 
-  const signIn = (username, password, login_type) => {
-    executeFetch("/accounts/login/", "POST", {
-      username,
-      password,
-      login_type,
-    });
+  const callApi = (data = null) => {
+    executeFetch(endpoint, method, data);
   };
 
-  return { response, error, signIn };
+  return { response, error, callApi };
+}
+// * 로그인(post)
+export function PostSignIn() {
+  return createApiHandler("/accounts/login/", "POST");
 }
 
 // * 상품 전체 불러오기(get)
 export function GetProductList() {
-  const { response, error, executeFetch } = useFetch();
-
-  const getProdList = () => {
-    executeFetch("/products/");
-  };
-
-  return { response, error, getProdList };
+  return createApiHandler("/products/");
 }
 
 // * 상품 상세 불러오기(get)
 export function GetProductDetail(productId) {
-  const { response, error, executeFetch } = useFetch();
-
-  const getProdDetail = () => {
-    executeFetch(`/products/${productId}/`);
-  };
-
-  return { response, error, getProdDetail };
+  return createApiHandler(`/products/${productId}/`, "GET");
 }
 
 // * 장바구니에 물건 넣기(post)
-export function PostProdCartAdd(product_id, quantity, check) {
-  const { response, error, executeFetch } = useFetch();
+export function PostCartQuantity() {
+  return createApiHandler("/cart/", "POST");
+}
 
-  const postCartAdd = () => {
-    executeFetch("/cart/", "POST", {
-      product_id,
-      quantity,
-      check,
-    });
-  };
-
-  return { response, error, postCartAdd };
+// * 장바구니 목록 보기(get)
+export function GetCartList() {
+  return createApiHandler("/cart/", "GET");
 }
 
 // ✅ usage
 // import { function } from "../../ApiHandler";
-// const { response, error, function } = function();
+// const { response: sampleRes, callApi: sampleFunc } = MethodFunc(arg);

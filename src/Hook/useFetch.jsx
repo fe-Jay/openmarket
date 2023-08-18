@@ -11,13 +11,11 @@ const userToken = () => {
   return userData.token || "";
 };
 
-const useFetch = (
-  initialUrl = "",
-  initialMethod = "GET",
-  initialData = {},
-  // token = null,
-  token = null || userToken(),
-) => {
+const useFetch = (initialUrl = "", initialMethod = "GET", initialData = {}) => {
+  // 사용자 Token Data 호출
+  const [userData] = useRecoilState(userDataAtom);
+  const token = userData?.token ?? null;
+
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +30,7 @@ const useFetch = (
     Authorization: token ? `JWT ${token}` : undefined,
   };
 
+  // Api Fetch 실행
   const BASE_URL = "https://openmarket.weniv.co.kr";
   useEffect(() => {
     const fetchData = async () => {
@@ -45,12 +44,9 @@ const useFetch = (
         });
         setResponse(fetchResult.data);
         setIsLoading(false);
-      } catch (error) {
-        console.error(
-          "There was an error with the fetch",
-          error.response || error.message,
-        );
-        setError(error);
+      } catch (err) {
+        console.error(err.response || err.message);
+        setError(err);
         setIsLoading(false);
       }
     };
@@ -58,11 +54,13 @@ const useFetch = (
     if (options.url) fetchData();
   }, [options]);
 
+  // Fetch 실행 함수
   const executeFetch = (url, method = "GET", data = null) => {
     setOptions({ url, method, data });
   };
 
-  if (isLoading) console.warn("🤔loading...", token);
+  // Fetch 데이터 예외처리
+  // if (isLoading) console.warn("🤔loading...");
   if (error) console.warn("🥶error!", error);
   if (response) console.table(response);
 
