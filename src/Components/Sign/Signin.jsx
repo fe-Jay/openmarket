@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
@@ -43,13 +45,18 @@ export default function Signin() {
   }, [username, password]);
 
   // *  로그인 실행
-  const [userType, setUserType] = useState("BUYER");
-  const { response, error, signIn } = PostSignIn();
+  const [login_type, setLoginType] = useState("BUYER");
+  const { response, error, callApi } = PostSignIn();
 
   const handleSignIn = e => {
     e.preventDefault();
     e.stopPropagation();
-    signIn(username.value, password.value, userType);
+    const data = {
+      username: username.value,
+      password: password.value,
+      login_type,
+    };
+    callApi(data);
   };
   const [userData, setUserData] = useRecoilState(userDataAtom);
   useEffect(() => {
@@ -80,7 +87,7 @@ export default function Signin() {
               type="radio"
               name="user_type"
               value="SELLER"
-              onClick={() => setUserType("SELLER")}
+              onClick={() => setLoginType("SELLER")}
             />
             판매자
           </label>
@@ -89,7 +96,7 @@ export default function Signin() {
               type="radio"
               name="user_type"
               value="BUYER"
-              onClick={() => setUserType("BUYER")}
+              onClick={() => setLoginType("BUYER")}
             />
             구매자
           </label>
@@ -131,13 +138,6 @@ export default function Signin() {
           로그아웃
         </button>
       </form>
-      {userData && (
-        <div>
-          <p>{userData.id}</p>
-          <p>{userData.user_type}</p>
-          <p>{userData.token}</p>
-        </div>
-      )}
     </section>
   );
 }
