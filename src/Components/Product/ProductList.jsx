@@ -7,10 +7,11 @@ import { GetProductList } from "../../ApiHandler";
 import { A11yHidden } from "../common/A11yHidden";
 
 export default function ProductList() {
-  const { response, error, getProdList } = GetProductList();
+  const { response, callApi } = GetProductList();
+  const hasResponse = response?.results?.length > 0;
 
   useEffect(() => {
-    getProdList();
+    callApi();
   }, []);
 
   return (
@@ -18,7 +19,7 @@ export default function ProductList() {
       <h2>
         <A11yHidden>상품리스트</A11yHidden>
       </h2>
-      {response && response.results && Array.isArray(response.results) ? (
+      {hasResponse ? (
         response.results.map(prod => (
           <article key={prod.product_id}>
             <Link to={`/${prod.product_id}`}>
