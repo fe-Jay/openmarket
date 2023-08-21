@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import Loading from "./Components/common/Loading";
+import CartList from "./Components/Shop/Cart/CartList";
 
 const Header = lazy(() => import("./Components/Header/Header"));
 const ProductDetails = lazy(() =>
@@ -22,6 +23,7 @@ export default function Router() {
               <Route path="" element={<ProductList />} />
               <Route path="signin" element={<Signin />} />
               <Route path=":productId" element={<ProductDetails />} />
+              <Route path="cart" element={<CartList />} />
             </Route>
           </Routes>
         </Wrapper>
