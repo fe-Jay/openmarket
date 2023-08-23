@@ -1,8 +1,16 @@
 import { atom } from "recoil";
 
-const cartCountAtom = atom({
-  key: "cartCount",
+export const countAtom = atom({
+  key: "countAtom",
+  default: 1,
+});
+
+export const priceAtom = atom({
+  key: "priceAtom",
   default: 0,
 });
 
-export default cartCountAtom;
+export const stockAtom = atom({
+  key: "stockAtom",
+  default: true,
+});
