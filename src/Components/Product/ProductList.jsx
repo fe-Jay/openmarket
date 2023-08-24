@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { GetProductList } from "../../ApiHandler";
-import { A11yHidden } from "../common/A11yHidden";
+import A11yHidden from "../common/A11yHidden";
 
 export default function ProductList() {
   const { response, callApi } = GetProductList();
@@ -42,7 +42,8 @@ export default function ProductList() {
 }
 
 const ProductItem = styled.section`
-  width: mim(100%, 1280px);
+  width: min(100%, 1280px);
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;

@@ -17,13 +17,16 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useRecoilState(countAtom);
   const total = useRecoilValue(totalPrice);
 
-  // * 상품 상세 페이지 데이터 호출
+  // * 상품 상세 페이지 데이터 호출 및 초기화
   const { response: prod, callApi: getProdId } = GetProductDetail(productId);
 
+  // 초기화
   useEffect(() => {
     getProdId();
+    setQuantity(1);
   }, []);
 
+  // 상품 데이터
   const {
     product_id,
     store_name,
@@ -35,7 +38,6 @@ export default function ProductDetails() {
   } = prod || {};
 
   // * 장바구니 담기
-  // 장바구니 담을 수량
   const [unitPrice, setUnitPrice] = useRecoilState(priceAtom);
   const [stock, setStock] = useRecoilState(stockAtom);
   const [data, setData] = useState({
@@ -58,7 +60,7 @@ export default function ProductDetails() {
   const { response: cartInt, callApi: postCartInt } = PostCartQuantity();
   const handleCartProdAdd = () => {
     postCartInt(data);
-    console.warn(data.product_id, data.quantity, data.check);
+    // console.warn(data.product_id, data.quantity, data.check);
   };
 
   return (
@@ -82,13 +84,13 @@ export default function ProductDetails() {
         </article>
       )}
 
-      <Counter />
+      <Counter quantity={quantity} />
 
       <article>
         <h2>총 상품금액</h2>
         <p>{total}</p>
       </article>
-      <Button size="md" variant="primary">
+      <Button size="md" variant="white">
         바로 구매
       </Button>
       <Button size="md" variant="primary" onClick={handleCartProdAdd}>
