@@ -37,6 +37,10 @@ export function GetCartList() {
   return createApiHandler("/cart/", "GET");
 }
 
+// * 장바구니 수량 변경(put)
+export function PutCartQuantity(cartId) {
+  return createApiHandler(`/cart/${cartId}`, "PUT");
+}
 // ✅ usage
 // import { function } from "../../ApiHandler";
 // const { response: sampleRes, callApi: sampleFunc } = MethodFunc(arg);
