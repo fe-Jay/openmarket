@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import search from "../../Assets/icon-search.svg";
-import { A11yHidden } from "../common/A11yHidden";
+import A11yHidden from "../common/A11yHidden";
 
 export default function Search() {
   return (

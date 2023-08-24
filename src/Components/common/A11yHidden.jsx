@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export function A11yHidden({ children }) {
+export default function A11yHidden({ children }) {
   return <ScreenOut>{children}</ScreenOut>;
 }
 
@@ -15,5 +15,3 @@ const ScreenOut = styled.span`
   padding: 0;
   position: absolute;
 `;
-
-export default A11yHidden;

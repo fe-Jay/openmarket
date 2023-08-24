@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import logo from "../../Assets/Logo-hodu.svg";
-import { A11yHidden } from "../common/A11yHidden";
+import A11yHidden from "../common/A11yHidden";
 
 import NavButton from "./NavButton";
 import Search from "./Search";
