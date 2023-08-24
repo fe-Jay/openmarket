@@ -38,6 +38,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
     }
 
+    img {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 100%;
+    }
+
     button {
     cursor: pointer;
     font:inherit;
